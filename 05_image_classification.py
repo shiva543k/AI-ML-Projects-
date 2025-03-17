@@ -1,3 +1,4 @@
+pip install tensorflow matplotlib - - install dependencies 
 import tensorflow as tf
 from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
