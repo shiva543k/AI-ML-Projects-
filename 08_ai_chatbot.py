@@ -1,3 +1,4 @@
+pip install nltk - - install dependcies 
 import nltk
 import random
 import string
