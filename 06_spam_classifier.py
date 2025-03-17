@@ -1,3 +1,4 @@
+pip install pandas scikit-learn nltk - - install dependencies 
 import pandas as pd
 import nltk
 from nltk.corpus import stopwords
