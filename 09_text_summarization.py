@@ -1,3 +1,7 @@
+Install dependencies:
+
+pip install nltk transformers torch
+
 import nltk
 from transformers import pipeline
 
