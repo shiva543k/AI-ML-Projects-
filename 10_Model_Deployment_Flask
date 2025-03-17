@@ -1,0 +1,105 @@
+📌 10_Model_Deployment_Flask: Deploying an AI Model with Flask
+
+This project demonstrates how to deploy an AI/ML model using Flask, a lightweight Python web framework.
+
+
+---
+
+🚀 Steps to Run the Script:
+
+1️⃣ Install dependencies:
+
+pip install flask numpy scikit-learn
+
+2️⃣ Save the machine learning model as model.pkl.
+3️⃣ Create the Flask app (app.py).
+4️⃣ Run the Flask app:
+
+python app.py
+
+5️⃣ Open http://127.0.0.1:5000/predict?input=5 in a browser to test the API.
+
+
+---
+
+📜 Machine Learning Model (train_model.py)
+
+import numpy as np
+import pickle
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+# Generate sample data
+X = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).reshape(-1, 1)
+y = np.array([2, 4, 6, 8, 10, 12, 14, 16, 18, 20])
+
+# Train a simple Linear Regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Save the trained model
+with open("model.pkl", "wb") as file:
+    pickle.dump(model, file)
+
+print("✅ Model saved as model.pkl")
+
+
+---
+
+📜 Flask API (app.py)
+
+from flask import Flask, request, jsonify
+import pickle
+import numpy as np
+
+app = Flask(__name__)
+
+# Load the trained model
+with open("model.pkl", "rb") as file:
+    model = pickle.load(file)
+
+@app.route("/")
+def home():
+    return "Welcome to the AI Model Deployment API!"
+
+@app.route("/predict", methods=["GET"])
+def predict():
+    try:
+        input_value = float(request.args.get("input", 0))
+        prediction = model.predict(np.array([[input_value]]))[0]
+        return jsonify({"input": input_value, "prediction": prediction})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
+
+---
+
+📂 Upload to GitHub
+
+1. Create a folder: 10_Model_Deployment_Flask/
+
+
+2. Upload:
+
+train_model.py (ML model training script)
+
+model.pkl (Saved model - generated after running train_model.py)
+
+app.py (Flask app)
+
+
+
+3. Commit & Push
+
+
+
+
+---
+
+✅ Next Step:
+
+Would you like guidance on deploying this Flask app to cloud platforms like Heroku or AWS? 🚀
+
